@@ -555,13 +555,14 @@ body::before {
 
 .about-image-card {
   width: 340px;
-  height: 420px;
+  min-height: 400px;
   border-radius: var(--radius-xl);
   overflow: hidden;
   border: 2px solid rgba(108, 99, 255, 0.1);
   box-shadow: var(--shadow-card);
   transition: var(--transition-slow);
   position: relative;
+  background: var(--bg-tertiary);
 }
 
 .about-image-card::after {
@@ -1271,6 +1272,25 @@ body::before {
   .hero-image-glow {
     width: 200px;
     height: 200px;
+  }
+}
+
+/* ======= CURSOR BLINK ======= */
+.cursor-blink {
+  border-right: 2px solid var(--accent-primary);
+  animation: blink 0.7s infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
   }
 }
 

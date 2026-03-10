@@ -10,11 +10,11 @@ export default function About() {
                 <div className="about-image-wrapper">
                     <div className="about-image-card">
                         <Image
-                            src="/about.jpg"
+                            src="/about.png"
                             alt="About Mukul Oli"
-                            width={360}
-                            height={420}
-                            style={{ objectFit: "cover" }}
+                            fill
+                            sizes="360px"
+                            style={{ objectFit: "contain", objectPosition: "center center" }}
                         />
                     </div>
                 </div>

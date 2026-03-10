@@ -134,22 +134,6 @@ export default function Hero() {
                 </div>
             </div>
 
-            <style jsx>{`
-        .cursor-blink {
-          border-right: 2px solid var(--accent-cyan);
-          animation: blink 0.7s infinite;
-          margin-left: 2px;
-        }
-        @keyframes blink {
-          0%,
-          100% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0;
-          }
-        }
-      `}</style>
         </section>
     );
 }
