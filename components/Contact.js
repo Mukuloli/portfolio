@@ -1,11 +1,58 @@
 "use client";
 
+import { useState } from "react";
+
 export default function Contact() {
+    const [sending, setSending] = useState(false);
+    const [sent, setSent] = useState(false);
+    const [error, setError] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setSending(true);
+        setError("");
+        setSent(false);
+
+        const formData = new FormData(e.target);
+        const data = {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            phone: formData.get("phone") || "",
+            subject: formData.get("subject"),
+            message: formData.get("message"),
+        };
+
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            });
+
+            if (!res.ok) {
+                const err = await res.json();
+                throw new Error(err.error || "Something went wrong");
+            }
+
+            setSent(true);
+            e.target.reset();
+            setTimeout(() => setSent(false), 5000);
+        } catch (err) {
+            console.error("Error sending message:", err);
+            setError(err.message || "Failed to send message. Please try again.");
+        } finally {
+            setSending(false);
+        }
+    };
+
     return (
         <section className="contact section-padding" id="contact">
             <h2 className="section-title">
                 Contact <span>Me</span>
             </h2>
+            <p className="section-subtitle">
+                Have a project in mind? Let&apos;s work together
+            </p>
             <div className="contact-wrapper">
                 <div className="contact-info-list">
                     <a
@@ -69,22 +116,7 @@ export default function Contact() {
                     </a>
                 </div>
 
-                <form
-                    className="contact-form"
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        const formData = new FormData(e.target);
-                        const name = formData.get("name");
-                        const email = formData.get("email");
-                        const subject = formData.get("subject");
-                        const message = formData.get("message");
-                        window.location.href = `mailto:mukuloli43@gmail.com?subject=${encodeURIComponent(
-                            subject
-                        )}&body=${encodeURIComponent(
-                            `Name: ${name}\nEmail: ${email}\n\n${message}`
-                        )}`;
-                    }}
-                >
+                <form className="contact-form" onSubmit={handleSubmit}>
                     <div className="form-row">
                         <input
                             type="text"
@@ -122,8 +154,44 @@ export default function Contact() {
                         required
                         id="contact-message"
                     ></textarea>
-                    <button type="submit" className="btn-primary">
-                        <i className="bx bx-send"></i> Send Message
+
+                    {sent && (
+                        <div
+                            style={{
+                                padding: "12px 20px",
+                                borderRadius: "12px",
+                                background: "rgba(0, 229, 160, 0.08)",
+                                border: "1px solid rgba(0, 229, 160, 0.2)",
+                                color: "#00E5A0",
+                                fontSize: "0.9rem",
+                                fontWeight: 600,
+                            }}
+                        >
+                            ✓ Message sent successfully! I&apos;ll get back to you soon.
+                        </div>
+                    )}
+
+                    {error && (
+                        <div
+                            style={{
+                                padding: "12px 20px",
+                                borderRadius: "12px",
+                                background: "rgba(255, 107, 138, 0.08)",
+                                border: "1px solid rgba(255, 107, 138, 0.2)",
+                                color: "#FF6B8A",
+                                fontSize: "0.9rem",
+                                fontWeight: 600,
+                            }}
+                        >
+                            ✕ {error}
+                        </div>
+                    )}
+
+                    <button type="submit" className="btn-primary" disabled={sending}>
+                        <i
+                            className={`bx ${sending ? "bx-loader-alt bx-spin" : "bx-send"}`}
+                        ></i>
+                        {sending ? "Sending..." : "Send Message"}
                     </button>
                 </form>
             </div>
