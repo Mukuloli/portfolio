@@ -21,7 +21,6 @@ export default function Hero() {
 
     useEffect(() => {
         if (!mounted) return;
-
         const currentRole = roles[roleIndex];
         let timeout;
 
@@ -42,7 +41,6 @@ export default function Hero() {
                 isDeleting ? 50 : 100
             );
         }
-
         return () => clearTimeout(timeout);
     }, [displayText, isDeleting, roleIndex, mounted]);
 
@@ -50,7 +48,7 @@ export default function Hero() {
         <section className="hero section-padding" id="home">
             <div className="hero-content">
                 <div className="hero-text">
-                    <p className="hero-greeting">Hello, It&apos;s Me</p>
+                    <p className="hero-greeting">✦ Available for hire</p>
                     <h1 className="hero-name">Mukul Oli</h1>
                     <h2 className="hero-role">
                         And I am a{" "}
@@ -60,11 +58,9 @@ export default function Hero() {
                         </span>
                     </h2>
                     <p className="hero-desc">
-                        Full-Time AI Developer at Webuters Technologies Pvt. Ltd., Noida.
-                        Specialized in building intelligent agents using LangChain, LiveKit,
-                        Pinecone, and multiple AI APIs. Passionate about creating AI-driven
-                        solutions including voice agents, RAG systems, and automated
-                        workflows.
+                        Full-Time AI Developer at Webuters Technologies, Noida.
+                        Crafting intelligent agents, voice AI systems, and RAG pipelines
+                        using LangChain, LiveKit, Pinecone & cutting-edge AI APIs.
                     </p>
 
                     <div className="hero-actions">
@@ -85,7 +81,7 @@ export default function Hero() {
                         </a>
                     </div>
 
-                    <div className="social-links">
+                    <div className="social-links" style={{ marginBottom: "36px" }}>
                         <a
                             href="https://www.linkedin.com/in/mukul-oli-268251217"
                             target="_blank"
@@ -119,6 +115,21 @@ export default function Hero() {
                             <i className="bx bx-phone"></i>
                         </a>
                     </div>
+
+                    <div className="hero-stats">
+                        <div className="hero-stat">
+                            <div className="hero-stat-number">1+</div>
+                            <div className="hero-stat-label">Years Exp.</div>
+                        </div>
+                        <div className="hero-stat">
+                            <div className="hero-stat-number">23+</div>
+                            <div className="hero-stat-label">Projects</div>
+                        </div>
+                        <div className="hero-stat">
+                            <div className="hero-stat-number">10+</div>
+                            <div className="hero-stat-label">AI Tools</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="hero-image-wrapper">
@@ -126,14 +137,13 @@ export default function Hero() {
                         <Image
                             src="/profile.jpg"
                             alt="Mukul Oli"
-                            width={380}
-                            height={380}
+                            width={370}
+                            height={370}
                             priority
                         />
                     </div>
                 </div>
             </div>
-
         </section>
     );
 }

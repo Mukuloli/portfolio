@@ -49,6 +49,9 @@ export default function Projects() {
             <h2 className="section-title">
                 Latest <span>Projects</span>
             </h2>
+            <p className="section-subtitle">
+                A showcase of my recent work in AI, voice agents, and automation
+            </p>
             <div className="projects-grid">
                 {projects.map((project, i) => (
                     <div key={i} className="glass-card project-card">

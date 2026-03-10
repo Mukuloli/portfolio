@@ -49,6 +49,9 @@ export default function Skills() {
             <h2 className="section-title">
                 Technical <span>Skills</span>
             </h2>
+            <p className="section-subtitle">
+                Technologies and tools I use to bring ideas to life
+            </p>
             <div className="skills-grid">
                 {skillCategories.map((cat, i) => (
                     <div key={i} className="glass-card skill-card">
