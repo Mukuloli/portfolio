@@ -17,14 +17,18 @@ export default function Skills() {
                 "LangGraph",
                 "RAG",
                 "Vector Search",
-                "Swarm",
                 "OpenAI API",
+                "Vertex AI",
+                "Claude",
+                "MCP Server",
+                "A2A Protocol",
+                "AI Agent Developer",
             ],
         },
         {
             icon: "bx bx-data",
             title: "Databases & Storage",
-            tags: ["Pinecone", "Firebase", "MySQL"],
+            tags: ["Pinecone", "Firebase", "MySQL", "SQL"],
         },
         {
             icon: "bx bx-microphone",
@@ -42,8 +46,7 @@ export default function Skills() {
             tags: [
                 "Git",
                 "GitHub",
-                "Version Control",
-                "sentence-transformers",
+                "Google ADK",
             ],
         },
     ];

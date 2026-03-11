@@ -11,6 +11,7 @@ import ParticlesBackground from "@/components/ParticlesBackground";
 export default function Home() {
   return (
     <>
+      <div className="mesh-gradient"></div>
       <ParticlesBackground />
       <Header />
       <main>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import ScrollReveal from "./ScrollReveal";
 
 export default function Hero() {
     const roles = [
@@ -48,38 +49,54 @@ export default function Hero() {
         <section className="hero section-padding" id="home">
             <div className="hero-content">
                 <div className="hero-text">
-                    <p className="hero-greeting">✦ Available for hire</p>
-                    <h1 className="hero-name">Mukul Oli</h1>
-                    <h2 className="hero-role">
-                        And I am a{" "}
-                        <span className="typed-text" suppressHydrationWarning>
-                            {mounted ? displayText : "AI Developer"}
-                            <span className="cursor-blink">&nbsp;</span>
-                        </span>
-                    </h2>
-                    <p className="hero-desc">
-                        Full-Time AI Developer at Webuters Technologies, Noida.
-                        Crafting intelligent agents, voice AI systems, and RAG pipelines
-                        using LangChain, LiveKit, Pinecone & cutting-edge AI APIs.
-                    </p>
+                    <ScrollReveal direction="left">
+                        <div className="hero-badge">
+                            <span className="badge-dot"></span>
+                            Available for hire
+                        </div>
+                    </ScrollReveal>
 
-                    <div className="hero-actions">
-                        <a href="/cv.pdf" download className="btn-primary">
-                            <i className="bx bx-download"></i> Download CV
-                        </a>
-                        <a
-                            href="#contact"
-                            className="btn-outline"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                document
-                                    .getElementById("contact")
-                                    ?.scrollIntoView({ behavior: "smooth" });
-                            }}
-                        >
-                            <i className="bx bx-envelope"></i> Contact Me
-                        </a>
-                    </div>
+                    <ScrollReveal direction="left" delay={100}>
+                        <h1 className="hero-name">Mukul Oli</h1>
+                    </ScrollReveal>
+
+                    <ScrollReveal direction="left" delay={200}>
+                        <h2 className="hero-role">
+                            And I am a{" "}
+                            <span className="typed-text" suppressHydrationWarning>
+                                {mounted ? displayText : "AI Developer"}
+                                <span className="cursor-blink">&nbsp;</span>
+                            </span>
+                        </h2>
+                    </ScrollReveal>
+
+                    <ScrollReveal direction="left" delay={300}>
+                        <p className="hero-desc">
+                            Full-Time AI Developer at Webuters Technologies, Noida.
+                            Crafting intelligent agents, voice AI systems, and RAG pipelines
+                            using LangChain, LiveKit, Pinecone & cutting-edge AI APIs.
+                        </p>
+                    </ScrollReveal>
+
+                    <ScrollReveal direction="left" delay={400}>
+                        <div className="hero-actions">
+                            <a href="/cv.pdf" download className="btn-primary">
+                                <i className="bx bx-download"></i> Download CV
+                            </a>
+                            <a
+                                href="#contact"
+                                className="btn-outline"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    document
+                                        .getElementById("contact")
+                                        ?.scrollIntoView({ behavior: "smooth" });
+                                }}
+                            >
+                                <i className="bx bx-envelope"></i> Contact Me
+                            </a>
+                        </div>
+                    </ScrollReveal>
 
                     <div className="social-links" style={{ marginBottom: "36px" }}>
                         <a

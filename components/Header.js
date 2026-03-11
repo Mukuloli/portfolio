@@ -47,34 +47,39 @@ export default function Header() {
     return (
         <>
             <header className={`header${mounted && scrolled ? " scrolled" : ""}`} suppressHydrationWarning>
-                <a href="#home" className="logo" onClick={(e) => { e.preventDefault(); handleNav("home"); }}>
-                    Mukul<span style={{ color: "var(--accent-cyan)" }}>.</span>dev
-                </a>
+                <div className="header-container">
+                    <a href="#home" className="logo" onClick={(e) => { e.preventDefault(); handleNav("home"); }}>
+                        Mukul<span>.</span>dev
+                    </a>
 
-                <nav className={`nav-links ${menuOpen ? "active" : ""}`}>
-                    {navItems.map((item) => (
-                        <a
-                            key={item.id}
-                            href={`#${item.id}`}
-                            className={mounted && activeSection === item.id ? "active" : ""}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleNav(item.id);
-                            }}
-                            suppressHydrationWarning
-                        >
-                            {item.label}
-                        </a>
-                    ))}
-                </nav>
+                    <nav className={`nav-links ${menuOpen ? "active" : ""}`}>
+                        {navItems.map((item) => (
+                            <a
+                                key={item.id}
+                                href={`#${item.id}`}
+                                className={mounted && activeSection === item.id ? "active" : ""}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handleNav(item.id);
+                                }}
+                                suppressHydrationWarning
+                            >
+                                {item.label}
+                                {mounted && activeSection === item.id && (
+                                    <span className="nav-indicator"></span>
+                                )}
+                            </a>
+                        ))}
+                    </nav>
 
-                <button
-                    className="menu-toggle"
-                    onClick={() => setMenuOpen(!menuOpen)}
-                    aria-label="Toggle menu"
-                >
-                    <i className={`bx ${menuOpen ? "bx-x" : "bx-menu"}`}></i>
-                </button>
+                    <button
+                        className={`menu-toggle ${menuOpen ? "active" : ""}`}
+                        onClick={() => setMenuOpen(!menuOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        <i className={`bx ${menuOpen ? "bx-x" : "bx-menu"}`}></i>
+                    </button>
+                </div>
             </header>
 
             {menuOpen && (
