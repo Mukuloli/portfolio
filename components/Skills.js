@@ -1,3 +1,7 @@
+"use client";
+
+import ScrollReveal from "./ScrollReveal";
+
 export default function Skills() {
     const skillCategories = [
         {
@@ -46,27 +50,31 @@ export default function Skills() {
 
     return (
         <section className="section-padding" id="skills">
-            <h2 className="section-title">
-                Technical <span>Skills</span>
-            </h2>
-            <p className="section-subtitle">
-                Technologies and tools I use to bring ideas to life
-            </p>
+            <ScrollReveal>
+                <h2 className="section-title">
+                    Technical <span>Skills</span>
+                </h2>
+                <p className="section-subtitle">
+                    Technologies and tools I use to bring ideas to life
+                </p>
+            </ScrollReveal>
             <div className="skills-grid">
                 {skillCategories.map((cat, i) => (
-                    <div key={i} className="glass-card skill-card">
-                        <div className="skill-icon">
-                            <i className={cat.icon}></i>
+                    <ScrollReveal key={i} delay={i * 80} direction="scale">
+                        <div className="glass-card skill-card">
+                            <div className="skill-icon">
+                                <i className={cat.icon}></i>
+                            </div>
+                            <h3>{cat.title}</h3>
+                            <div className="skill-tags">
+                                {cat.tags.map((tag, j) => (
+                                    <span key={j} className="skill-tag">
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
                         </div>
-                        <h3>{cat.title}</h3>
-                        <div className="skill-tags">
-                            {cat.tags.map((tag, j) => (
-                                <span key={j} className="skill-tag">
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
+                    </ScrollReveal>
                 ))}
             </div>
         </section>

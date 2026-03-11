@@ -135,7 +135,7 @@ export default function Hero() {
                 <div className="hero-image-wrapper">
                     <div className="hero-image-glow">
                         <Image
-                            src="/profile.jpg"
+                            src="/shared image.jfif"
                             alt="Mukul Oli"
                             width={370}
                             height={370}

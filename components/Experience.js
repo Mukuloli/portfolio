@@ -1,3 +1,7 @@
+"use client";
+
+import ScrollReveal from "./ScrollReveal";
+
 export default function Experience() {
     const experiences = [
         {
@@ -26,21 +30,25 @@ export default function Experience() {
 
     return (
         <section className="experience section-padding" id="experience">
-            <h2 className="section-title">
-                Work <span>Experience</span>
-            </h2>
+            <ScrollReveal>
+                <h2 className="section-title">
+                    Work <span>Experience</span>
+                </h2>
+            </ScrollReveal>
             <div className="experience-timeline">
                 {experiences.map((exp, i) => (
-                    <div key={i} className="glass-card experience-card">
-                        <h3>{exp.title}</h3>
-                        <h4>{exp.company}</h4>
-                        <span className="experience-date">{exp.date}</span>
-                        <ul>
-                            {exp.points.map((point, j) => (
-                                <li key={j}>{point}</li>
-                            ))}
-                        </ul>
-                    </div>
+                    <ScrollReveal key={i} delay={i * 150} direction="left">
+                        <div className="glass-card experience-card">
+                            <h3>{exp.title}</h3>
+                            <h4>{exp.company}</h4>
+                            <span className="experience-date">{exp.date}</span>
+                            <ul>
+                                {exp.points.map((point, j) => (
+                                    <li key={j}>{point}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </ScrollReveal>
                 ))}
             </div>
         </section>
