@@ -38,7 +38,7 @@ export default function Skills() {
         {
             icon: "bx bx-code-alt",
             title: "Backend & APIs",
-            tags: ["FastAPI", "Flask", "REST APIs", "Streamlit"],
+            tags: ["FastAPI", "Flask", "REST APIs", "Streamlit", "BytePlus", "Computer Use"],
         },
         {
             icon: "bx bx-git-branch",

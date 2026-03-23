@@ -6,6 +6,16 @@ export default function Projects() {
     const projects = [
         {
             num: "01",
+            title: "School Website",
+            desc: "A premium, modern, and fully responsive educational website for Darpan Children Garden. Features a modern design system, seamless navigation, and comprehensive SEO.",
+            tech: ["Next.js", "React", "Vercel"],
+            link: "https://github.com/Mukuloli/school-website-1",
+            liveDemo: "https://school-website-1-qk19-g7e7wc8um-mukul-olis-projects.vercel.app/",
+            icon: "bx bx-building-house",
+            color: "var(--accent-1)",
+        },
+        {
+            num: "02",
             title: "AI Voice Agent System",
             desc: "AI-powered Voice Agent for Indian Oil petrol pumps, capable of handling live interactions using LiveKit and Google Realtime. Implements real-time voice-to-text, TTS, Pinecone vector search, and Firebase for smooth, human-like conversations.",
             tech: ["LiveKit", "WebRTC", "Python", "Pinecone", "Firebase", "OpenAI TTS"],
@@ -14,7 +24,7 @@ export default function Projects() {
             color: "var(--accent-1)",
         },
         {
-            num: "02",
+            num: "03",
             title: "Deep Agent",
             desc: "Advanced AI agent framework for building autonomous, multi-step intelligent agents with deep reasoning capabilities and tool integrations.",
             tech: ["Python", "LangChain", "AI Agents", "Deep Reasoning"],
@@ -23,7 +33,7 @@ export default function Projects() {
             color: "var(--accent-2)",
         },
         {
-            num: "03",
+            num: "04",
             title: "RAG Front-End Platform",
             desc: "Full-stack RAG application with Firebase Authentication (Email/Google Sign-in), featuring a clean UI for document querying with AI-powered context-aware answers.",
             tech: ["Next.js", "Firebase Auth", "RAG", "Google Sign-In", "Vercel"],
@@ -33,7 +43,7 @@ export default function Projects() {
             color: "#FF6B8A",
         },
         {
-            num: "04",
+            num: "05",
             title: "Agentic Vision",
             desc: "AI-powered computer vision system with agentic capabilities for intelligent image analysis, object detection, and visual understanding workflows.",
             tech: ["Python", "Computer Vision", "AI Agents", "Image Analysis"],
@@ -42,7 +52,7 @@ export default function Projects() {
             color: "var(--accent-1)",
         },
         {
-            num: "05",
+            num: "06",
             title: "Query Engine",
             desc: "Intelligent query engine for natural language data querying. Leverages AI to understand user intent and retrieve accurate results from structured/unstructured data.",
             tech: ["Python", "NLP", "RAG", "Vector Search"],
@@ -51,7 +61,7 @@ export default function Projects() {
             color: "var(--accent-2)",
         },
         {
-            num: "06",
+            num: "07",
             title: "Smart AI Toolkit",
             desc: "Comprehensive AI toolkit featuring chatbot, audio-to-text conversion, YouTube transcription, PDF summarizer, and multilingual translator powered by LangChain.",
             tech: ["LangChain", "ChatGPT API", "Flask", "MySQL", "Streamlit"],
@@ -90,28 +100,30 @@ export default function Projects() {
                                     ))}
                                 </div>
                                 <div className="project-links">
-                                    <a
-                                        href={project.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="project-link"
-                                    >
-                                        <i className="bx bxl-github"></i>
-                                        View Code
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={2}
-                                            stroke="currentColor"
+                                    {project.link && (
+                                        <a
+                                            href={project.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="project-link"
                                         >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                                            />
-                                        </svg>
-                                    </a>
+                                            <i className="bx bxl-github"></i>
+                                            View Code
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth={2}
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                                                />
+                                            </svg>
+                                        </a>
+                                    )}
                                     {project.liveDemo && (
                                         <a
                                             href={project.liveDemo}
