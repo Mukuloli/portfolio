@@ -1634,9 +1634,12 @@ body::after {
     min-height: 300px;
   }
 
-  .skills-grid,
-  .projects-grid {
+  .skills-grid {
     grid-template-columns: 1fr;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .contact-wrapper {
