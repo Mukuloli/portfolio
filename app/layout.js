@@ -21,7 +21,11 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <div className="app-wrapper">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }

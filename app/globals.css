@@ -57,6 +57,13 @@ body {
   overflow-x: hidden;
 }
 
+.app-wrapper {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -132,6 +139,7 @@ body::after {
 .experience,
 .contact {
   position: relative;
+  overflow: hidden;
 }
 
 /* ======= MESH GRADIENT ======= */
@@ -461,6 +469,7 @@ body::after {
   justify-content: center;
   padding: 140px 6% 80px;
   overflow: hidden;
+  max-width: 100%;
 }
 
 .hero::before {
@@ -652,6 +661,7 @@ body::after {
 .hero-image-wrapper {
   flex-shrink: 0;
   position: relative;
+  overflow: hidden;
 }
 
 .hero-image-glow {
@@ -763,6 +773,7 @@ body::after {
 /* ======= ABOUT ======= */
 .about {
   background: var(--bg-secondary);
+  overflow: hidden;
 }
 
 .about-content {
@@ -775,6 +786,7 @@ body::after {
 
 .about-image-wrapper {
   flex-shrink: 0;
+  overflow: hidden;
 }
 
 .about-image-card {
@@ -965,6 +977,7 @@ body::after {
 /* ======= EXPERIENCE ======= */
 .experience {
   background: var(--bg-secondary);
+  overflow: hidden;
 }
 
 .experience-timeline {
@@ -1006,7 +1019,7 @@ body::after {
 }
 
 .experience-card:hover {
-  transform: translateX(12px) translateY(-5px);
+  transform: translateY(-5px);
   border-color: rgba(139, 92, 246, 0.3);
   box-shadow: -10px 10px 40px rgba(0, 0, 0, 0.2), var(--glow-1);
 }
@@ -1242,6 +1255,7 @@ body::after {
 .contact {
   background: var(--bg-secondary);
   overflow: hidden;
+  max-width: 100%;
 }
 
 .contact-wrapper {
@@ -1289,7 +1303,7 @@ body::after {
 .contact-info-item:hover {
   border-color: rgba(123, 97, 255, 0.15);
   background: rgba(123, 97, 255, 0.04);
-  transform: translateX(8px);
+  transform: translateY(-3px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), var(--glow-1);
 }
 
@@ -1334,6 +1348,8 @@ body::after {
   font-weight: 600;
   color: var(--text-primary);
   line-height: 1.3;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* --- Right: Form Card --- */
@@ -1406,6 +1422,7 @@ body::after {
   border-top: 1px solid rgba(123, 97, 255, 0.06);
   background: var(--bg-primary);
   position: relative;
+  overflow: hidden;
 }
 
 .footer::before {
@@ -1614,6 +1631,10 @@ body::after {
     height: 220px;
   }
 
+  .hero-image-glow::before {
+    inset: -10px;
+  }
+
   .hero-stats {
     justify-content: center;
     gap: 32px;
@@ -1634,6 +1655,10 @@ body::after {
     min-height: 300px;
   }
 
+  .about-image-card::before {
+    inset: -4px;
+  }
+
   .skills-grid {
     grid-template-columns: 1fr;
   }
@@ -1650,20 +1675,57 @@ body::after {
     flex-direction: column;
   }
 
+  .contact-form {
+    padding: 28px 20px;
+  }
+
+  .experience-timeline {
+    padding-left: 30px;
+  }
+
+  .experience-timeline::before {
+    left: 2px;
+  }
+
   .experience-card {
-    margin-left: 32px;
+    margin-left: 0;
   }
 
   .experience-card::before {
-    left: -39px;
-    width: 14px;
-    height: 14px;
+    left: -36px;
+    width: 12px;
+    height: 12px;
+  }
+
+  .experience-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .education-item:hover {
+    transform: none;
+  }
+
+  .glass-card:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Prevent scroll-reveal horizontal transforms from causing overflow */
+  .scroll-reveal-left {
+    transform: translateY(30px);
+  }
+
+  .scroll-reveal-right {
+    transform: translateY(30px);
   }
 
   .footer {
     flex-direction: column-reverse;
     gap: 14px;
     text-align: center;
+  }
+
+  .footer p {
+    font-size: 0.75rem;
   }
 }
 
@@ -1681,12 +1743,105 @@ body::after {
   }
 
   .glass-card {
-    padding: 28px 20px;
+    padding: 24px 16px;
+  }
+
+  .glass-card:hover {
+    transform: translateY(-3px);
   }
 
   .hero-stats {
     flex-direction: column;
     gap: 16px;
     align-items: center;
+  }
+
+  .hero-image-glow {
+    width: 180px;
+    height: 180px;
+  }
+
+  .hero-image-glow::before {
+    inset: -6px;
+  }
+
+  .hero::before {
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .hero::after {
+    width: 200px;
+    height: 200px;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .experience-timeline {
+    padding-left: 24px;
+  }
+
+  .experience-card::before {
+    left: -29px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .experience-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .experience-card h4 {
+    font-size: 0.9rem;
+  }
+
+  .experience-card ul li {
+    font-size: 0.85rem;
+    padding-left: 16px;
+  }
+
+  .about-image-card {
+    width: 200px;
+    min-height: 250px;
+  }
+
+  .contact-form {
+    padding: 22px 16px;
+  }
+
+  .contact-info-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
+
+  .contact-info-item {
+    padding: 16px 14px;
+    gap: 14px;
+  }
+
+  .contact-info-item p {
+    font-size: 0.85rem;
+  }
+
+  .section-title {
+    font-size: 1.9rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 40px;
+  }
+
+  .btn-primary {
+    padding: 12px 28px;
+    font-size: 0.85rem;
+  }
+
+  .btn-outline {
+    padding: 11px 26px;
+    font-size: 0.85rem;
   }
 }
