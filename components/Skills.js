@@ -23,6 +23,8 @@ export default function Skills() {
                 "MCP Server",
                 "A2A Protocol",
                 "AI Agent Developer",
+                "Google ADK",
+                "Computer Use"
             ],
         },
         {
@@ -38,7 +40,7 @@ export default function Skills() {
         {
             icon: "bx bx-code-alt",
             title: "Backend & APIs",
-            tags: ["FastAPI", "Flask", "REST APIs", "Streamlit", "BytePlus", "Computer Use"],
+            tags: ["FastAPI", "Flask",  "Streamlit", "BytePlus"],
         },
         {
             icon: "bx bx-git-branch",
@@ -46,7 +48,8 @@ export default function Skills() {
             tags: [
                 "Git",
                 "GitHub",
-                "Google ADK",
+                "Vercel",
+                "Render",
             ],
         },
     ];
