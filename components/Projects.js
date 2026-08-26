@@ -1,11 +1,32 @@
 "use client";
 
+import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
 
 export default function Projects() {
     const projects = [
         {
             num: "01",
+            title: "AI Image & Video Generation Platform",
+            desc: "End-to-end Generative AI and Agentic Vision platform for automated visual content creation. Combines AI agents, computer vision, image generation, and video generation to understand, generate, and transform visual content.",
+            tech: ["Python", "Generative AI", "Agentic AI", "Computer Vision", "LLMs", "OpenAI", "Gemini"],
+            internalLink: "/projects/ai-vision-platform",
+            icon: "bx bx-palette",
+            color: "var(--accent-1)",
+            featured: true,
+        },
+        {
+            num: "02",
+            title: "AI Portfolio Voice Bot",
+            desc: "Real-time AI voice assistant trained on professional resume, projects, and experience. Powered by Gemini Live API with FastAPI backend and LangChain for intelligent, human-like voice conversations.",
+            tech: ["Gemini Live API", "FastAPI", "LangChain", "Python", "WebSockets"],
+            liveDemo: "https://voice-bot-28-july-1.onrender.com/",
+            icon: "bx bx-microphone",
+            color: "var(--accent-2)",
+            featured: true,
+        },
+        {
+            num: "03",
             title: "Bal Sanskar Sainik School Jeolikote",
             desc: "A premium, modern, and fully responsive school website for Bal Sanskar Sainik School Jeolikote. Features a modern design system, seamless navigation, admission info, and comprehensive SEO.",
             tech: ["Next.js",  "Vercel"],
@@ -14,7 +35,7 @@ export default function Projects() {
             color: "var(--accent-1)",
         },
         {
-            num: "02",
+            num: "04",
             title: "School Website",
             desc: "A premium, modern, and fully responsive educational website for Darpan Children Garden. Features a modern design system, seamless navigation, and comprehensive SEO.",
             tech: ["Next.js",  "Vercel"],
@@ -24,7 +45,7 @@ export default function Projects() {
             color: "var(--accent-1)",
         },
         {
-            num: "03",
+            num: "05",
             title: "AI Voice Agent System",
             desc: "AI-powered Voice Agent for Indian Oil petrol pumps, capable of handling live interactions using LiveKit and Google Realtime. Implements real-time voice-to-text, TTS, Pinecone vector search, and Firebase for smooth, human-like conversations.",
             tech: ["LiveKit", "WebRTC", "Python", "Pinecone", "Firebase", "OpenAI TTS"],
@@ -33,7 +54,7 @@ export default function Projects() {
             color: "var(--accent-1)",
         },
         {
-            num: "04",
+            num: "06",
             title: "Deep Agent",
             desc: "Advanced AI agent framework for building autonomous, multi-step intelligent agents with deep reasoning capabilities and tool integrations.",
             tech: ["Python", "LangChain", "AI Agents", "Deep Reasoning"],
@@ -42,7 +63,7 @@ export default function Projects() {
             color: "var(--accent-2)",
         },
         {
-            num: "05",
+            num: "07",
             title: "RAG Front-End Platform",
             desc: "Full-stack RAG application with Firebase Authentication (Email/Google Sign-in), featuring a clean UI for document querying with AI-powered context-aware answers.",
             tech: ["Next.js", "Firebase Auth", "RAG", "Google Sign-In", "Vercel"],
@@ -52,7 +73,7 @@ export default function Projects() {
             color: "#FF6B8A",
         },
         {
-            num: "06",
+            num: "08",
             title: "Agentic Vision",
             desc: "AI-powered computer vision system with agentic capabilities for intelligent image analysis, object detection, and visual understanding workflows.",
             tech: ["Python", "Computer Vision", "AI Agents", "Image Analysis"],
@@ -61,7 +82,7 @@ export default function Projects() {
             color: "var(--accent-1)",
         },
         {
-            num: "07",
+            num: "09",
             title: "Query Engine",
             desc: "Intelligent query engine for natural language data querying. Leverages AI to understand user intent and retrieve accurate results from structured/unstructured data.",
             tech: ["Python",  "RAG", "Vector Search"],
@@ -70,7 +91,7 @@ export default function Projects() {
             color: "var(--accent-2)",
         },
         {
-            num: "08",
+            num: "10",
             title: "Smart AI Toolkit",
             desc: "Comprehensive AI toolkit featuring chatbot, audio-to-text conversion, YouTube transcription, PDF summarizer, and multilingual translator powered by LangChain.",
             tech: ["LangChain", "ChatGPT API", "Flask", "MySQL", "Streamlit"],
@@ -93,8 +114,13 @@ export default function Projects() {
             <div className="projects-grid">
                 {projects.map((project, i) => (
                     <ScrollReveal key={i} delay={i * 100} direction="up">
-                        <div className="glass-card project-card">
+                        <div className={`glass-card project-card${project.featured ? " featured-project" : ""}`}>
                             <div className="project-card-inner">
+                                {project.featured && (
+                                    <div className="featured-badge">
+                                        <i className="bx bx-star"></i> Featured
+                                    </div>
+                                )}
                                 <div className="project-icon-badge" style={{ color: project.color }}>
                                     <i className={project.icon}></i>
                                 </div>
@@ -109,6 +135,15 @@ export default function Projects() {
                                     ))}
                                 </div>
                                 <div className="project-links">
+                                    {project.internalLink && (
+                                        <Link
+                                            href={project.internalLink}
+                                            className="project-link live-link"
+                                        >
+                                            <i className="bx bx-right-arrow-alt"></i>
+                                            View Project
+                                        </Link>
+                                    )}
                                     {project.link && (
                                         <a
                                             href={project.link}
