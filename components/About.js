@@ -5,7 +5,7 @@ import ScrollReveal from "./ScrollReveal";
 
 export default function About() {
     return (
-        <section className="about section-padding" id="about">
+        <section className="about section-padding" id="about" tabIndex={-1}>
             <ScrollReveal>
                 <h2 className="section-title">
                     About <span>Me</span>
@@ -17,7 +17,7 @@ export default function About() {
                         <div className="about-image-card">
                             <Image
                                 src="/about.png"
-                                alt="About Mukul Oli"
+                                alt="Illustration of Mukul Oli at work"
                                 fill
                                 sizes="360px"
                                 style={{ objectFit: "contain", objectPosition: "center center" }}
@@ -41,22 +41,37 @@ export default function About() {
 
                         <div className="education-list">
                             <h4 className="education-label">Education</h4>
-                            <div className="education-item">
-                                <span>
-                                    <strong>MCA</strong> — Birla Institute of Applied Sciences,
-                                    Bhimtal (Uttarakhand Technical University), 2023–2025
-                                </span>
-                            </div>
-                            <div className="education-item">
-                                <span>
-                                    <strong>BCA</strong> — D.S.B Campus Nainital, Kumaun University,
-                                    2020–2023
-                                </span>
-                            </div>
+                            <ul className="education-items">
+                                <li className="education-item">
+                                    <span>
+                                        <strong>MCA</strong> — Birla Institute of Applied Sciences,
+                                        Bhimtal (Uttarakhand Technical University), 2023–2025
+                                    </span>
+                                </li>
+                                <li className="education-item">
+                                    <span>
+                                        <strong>BCA</strong> — D.S.B Campus Nainital, Kumaun University,
+                                        2020–2023
+                                    </span>
+                                </li>
+                            </ul>
                         </div>
 
-                        <a href="#contact" className="btn-primary">
-                            <i className="bx bx-message-dots"></i> Contact Me
+                        <a
+                            href="#contact"
+                            className="btn-primary"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                const contactSection = document.getElementById("contact");
+                                if (contactSection) {
+                                    contactSection.scrollIntoView({ behavior: "smooth" });
+                                    contactSection.setAttribute("tabindex", "-1");
+                                    contactSection.focus({ preventScroll: true });
+                                }
+                            }}
+                        >
+                            <i className="bx bx-message-dots" aria-hidden="true"></i>
+                            Contact Me
                         </a>
                     </div>
                 </ScrollReveal>

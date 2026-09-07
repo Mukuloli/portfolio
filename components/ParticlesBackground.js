@@ -8,6 +8,11 @@ export default function ParticlesBackground() {
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
+
+        // Respect prefers-reduced-motion
+        const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+        if (motionQuery.matches) return;
+
         const ctx = canvas.getContext("2d");
 
         let animationId;
@@ -72,7 +77,10 @@ export default function ParticlesBackground() {
             }
         }
 
+        let isRunning = true;
+
         function animate() {
+            if (!isRunning) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach((p) => {
                 p.update();
@@ -83,15 +91,31 @@ export default function ParticlesBackground() {
         }
         animate();
 
+        // Stop animation if reduced motion preference changes
+        const handleMotionChange = (e) => {
+            if (e.matches) {
+                isRunning = false;
+                cancelAnimationFrame(animationId);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            } else {
+                isRunning = true;
+                animate();
+            }
+        };
+        motionQuery.addEventListener("change", handleMotionChange);
+
         return () => {
+            isRunning = false;
             cancelAnimationFrame(animationId);
             window.removeEventListener("resize", resize);
+            motionQuery.removeEventListener("change", handleMotionChange);
         };
     }, []);
 
     return (
         <canvas
             ref={canvasRef}
+            aria-hidden="true"
             style={{
                 position: "fixed",
                 top: 0,

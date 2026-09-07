@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint",
+    "test:a11y": "playwright test"
   },
   "dependencies": {
     "firebase": "^12.10.0",
@@ -15,6 +17,9 @@
     "react-dom": "19.2.3"
   },
   "devDependencies": {
-    "babel-plugin-react-compiler": "1.0.0"
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
+    "babel-plugin-react-compiler": "1.0.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2"
   }
 }

@@ -102,7 +102,7 @@ export default function Projects() {
     ];
 
     return (
-        <section className="section-padding" id="projects">
+        <section className="section-padding" id="projects" tabIndex={-1}>
             <ScrollReveal>
                 <h2 className="section-title">
                     Latest <span>Projects</span>
@@ -114,33 +114,34 @@ export default function Projects() {
             <div className="projects-grid">
                 {projects.map((project, i) => (
                     <ScrollReveal key={i} delay={i * 100} direction="up">
-                        <div className={`glass-card project-card${project.featured ? " featured-project" : ""}`}>
+                        <article className={`glass-card project-card${project.featured ? " featured-project" : ""}`}>
                             <div className="project-card-inner">
                                 {project.featured && (
                                     <div className="featured-badge">
-                                        <i className="bx bx-star"></i> Featured
+                                        <i className="bx bx-star" aria-hidden="true"></i> Featured
                                     </div>
                                 )}
-                                <div className="project-icon-badge" style={{ color: project.color }}>
+                                <div className="project-icon-badge" style={{ color: project.color }} aria-hidden="true">
                                     <i className={project.icon}></i>
                                 </div>
-                                <div className="project-number">{project.num}</div>
+                                <div className="project-number" aria-hidden="true">{project.num}</div>
                                 <h3>{project.title}</h3>
                                 <p>{project.desc}</p>
-                                <div className="project-tech-tags">
+                                <ul className="project-tech-tags" aria-label={`Technologies used in ${project.title}`}>
                                     {project.tech.map((t, j) => (
-                                        <span key={j} className="tech-tag">
+                                        <li key={j} className="tech-tag">
                                             {t}
-                                        </span>
+                                        </li>
                                     ))}
-                                </div>
+                                </ul>
                                 <div className="project-links">
                                     {project.internalLink && (
                                         <Link
                                             href={project.internalLink}
                                             className="project-link live-link"
+                                            aria-label={`View ${project.title} project details`}
                                         >
-                                            <i className="bx bx-right-arrow-alt"></i>
+                                            <i className="bx bx-right-arrow-alt" aria-hidden="true"></i>
                                             View Project
                                         </Link>
                                     )}
@@ -150,8 +151,9 @@ export default function Projects() {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="project-link"
+                                            aria-label={`View ${project.title} source code on GitHub (opens in new tab)`}
                                         >
-                                            <i className="bx bxl-github"></i>
+                                            <i className="bx bxl-github" aria-hidden="true"></i>
                                             View Code
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -159,6 +161,7 @@ export default function Projects() {
                                                 viewBox="0 0 24 24"
                                                 strokeWidth={2}
                                                 stroke="currentColor"
+                                                aria-hidden="true"
                                             >
                                                 <path
                                                     strokeLinecap="round"
@@ -174,14 +177,15 @@ export default function Projects() {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="project-link live-link"
+                                            aria-label={`Live demo of ${project.title} (opens in new tab)`}
                                         >
-                                            <i className="bx bx-link-external"></i>
+                                            <i className="bx bx-link-external" aria-hidden="true"></i>
                                             Live Demo
                                         </a>
                                     )}
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     </ScrollReveal>
                 ))}
             </div>

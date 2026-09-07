@@ -14,7 +14,7 @@ export default function Home() {
       <div className="mesh-gradient"></div>
       <ParticlesBackground />
       <Header />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Hero />
         <About />
         <Skills />

@@ -29,7 +29,7 @@ export default function Experience() {
     ];
 
     return (
-        <section className="experience section-padding" id="experience">
+        <section className="experience section-padding" id="experience" tabIndex={-1}>
             <ScrollReveal>
                 <h2 className="section-title">
                     Work <span>Experience</span>
@@ -38,16 +38,18 @@ export default function Experience() {
             <div className="experience-timeline">
                 {experiences.map((exp, i) => (
                     <ScrollReveal key={i} delay={i * 150} direction="left">
-                        <div className="glass-card experience-card">
+                        <article className="glass-card experience-card">
                             <h3>{exp.title}</h3>
                             <h4>{exp.company}</h4>
-                            <span className="experience-date">{exp.date}</span>
+                            <span className="experience-date">
+                                <time>{exp.date}</time>
+                            </span>
                             <ul>
                                 {exp.points.map((point, j) => (
                                     <li key={j}>{point}</li>
                                 ))}
                             </ul>
-                        </div>
+                        </article>
                     </ScrollReveal>
                 ))}
             </div>

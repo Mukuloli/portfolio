@@ -1,12 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import ScrollReveal from "./ScrollReveal";
 
 export default function Contact() {
     const [sending, setSending] = useState(false);
     const [sent, setSent] = useState(false);
     const [error, setError] = useState("");
+    const [fieldErrors, setFieldErrors] = useState({});
+    const statusRef = useRef(null);
+    const formRef = useRef(null);
+
+    const validateField = (name, value) => {
+        switch (name) {
+            case "name":
+                return value.trim() ? "" : "Full name is required.";
+            case "email":
+                if (!value.trim()) return "Email address is required.";
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
+                    return "Please enter a valid email address.";
+                return "";
+            case "subject":
+                return value.trim() ? "" : "Subject is required.";
+            case "message":
+                return value.trim() ? "" : "Message is required.";
+            default:
+                return "";
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,6 +43,25 @@ export default function Contact() {
             subject: formData.get("subject"),
             message: formData.get("message"),
         };
+
+        // Client-side validation
+        const errors = {};
+        ["name", "email", "subject", "message"].forEach((field) => {
+            const err = validateField(field, data[field] || "");
+            if (err) errors[field] = err;
+        });
+
+        if (Object.keys(errors).length > 0) {
+            setFieldErrors(errors);
+            setSending(false);
+            // Focus the first errored field
+            const firstErrorField = Object.keys(errors)[0];
+            const el = document.getElementById(`contact-${firstErrorField}`);
+            if (el) el.focus();
+            return;
+        }
+
+        setFieldErrors({});
 
         try {
             const res = await fetch("/api/contact", {
@@ -46,8 +86,32 @@ export default function Contact() {
         }
     };
 
+    const handleBlur = (e) => {
+        const { name, value } = e.target;
+        const err = validateField(name, value);
+        setFieldErrors((prev) => {
+            if (err) return { ...prev, [name]: err };
+            const next = { ...prev };
+            delete next[name];
+            return next;
+        });
+    };
+
+    const renderFieldError = (fieldName) => {
+        if (!fieldErrors[fieldName]) return null;
+        return (
+            <p
+                id={`contact-${fieldName}-error`}
+                className="field-error"
+                role="alert"
+            >
+                {fieldErrors[fieldName]}
+            </p>
+        );
+    };
+
     return (
-        <section className="contact section-padding" id="contact">
+        <section className="contact section-padding" id="contact" tabIndex={-1}>
             <ScrollReveal>
                 <h2 className="section-title">
                     Contact <span>Me</span>
@@ -64,11 +128,11 @@ export default function Contact() {
                             className="contact-info-item"
                             style={{ textDecoration: "none" }}
                         >
-                            <div className="contact-info-icon">
+                            <div className="contact-info-icon" aria-hidden="true">
                                 <i className="bx bx-envelope"></i>
                             </div>
                             <div>
-                                <h4>Email</h4>
+                                <h3>Email</h3>
                                 <p>mukuloli43@gmail.com</p>
                             </div>
                         </a>
@@ -78,11 +142,11 @@ export default function Contact() {
                             className="contact-info-item"
                             style={{ textDecoration: "none" }}
                         >
-                            <div className="contact-info-icon">
+                            <div className="contact-info-icon" aria-hidden="true">
                                 <i className="bx bx-phone"></i>
                             </div>
                             <div>
-                                <h4>Phone</h4>
+                                <h3>Phone</h3>
                                 <p>+91 9411398572</p>
                             </div>
                         </a>
@@ -93,12 +157,13 @@ export default function Contact() {
                             rel="noopener noreferrer"
                             className="contact-info-item"
                             style={{ textDecoration: "none" }}
+                            aria-label="LinkedIn profile for Mukul Oli (opens in new tab)"
                         >
-                            <div className="contact-info-icon">
+                            <div className="contact-info-icon" aria-hidden="true">
                                 <i className="bx bxl-linkedin"></i>
                             </div>
                             <div>
-                                <h4>LinkedIn</h4>
+                                <h3>LinkedIn</h3>
                                 <p>mukul-oli-268251217</p>
                             </div>
                         </a>
@@ -109,12 +174,13 @@ export default function Contact() {
                             rel="noopener noreferrer"
                             className="contact-info-item"
                             style={{ textDecoration: "none" }}
+                            aria-label="GitHub profile for Mukul Oli (opens in new tab)"
                         >
-                            <div className="contact-info-icon">
+                            <div className="contact-info-icon" aria-hidden="true">
                                 <i className="bx bxl-github"></i>
                             </div>
                             <div>
-                                <h4>GitHub</h4>
+                                <h3>GitHub</h3>
                                 <p>Mukuloli</p>
                             </div>
                         </a>
@@ -122,80 +188,122 @@ export default function Contact() {
                 </ScrollReveal>
 
                 <ScrollReveal direction="right" delay={200}>
-                    <form className="contact-form" onSubmit={handleSubmit}>
+                    <form
+                        ref={formRef}
+                        className="contact-form"
+                        onSubmit={handleSubmit}
+                        noValidate
+                    >
                         <div className="form-row">
-                            <input
-                                type="text"
-                                name="name"
-                                placeholder="Full Name"
-                                required
-                                id="contact-name"
-                            />
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Email Address"
-                                required
-                                id="contact-email"
-                            />
+                            <div className="form-group">
+                                <label htmlFor="contact-name">
+                                    Full Name <span className="required-indicator" aria-hidden="true">*</span>
+                                    <span className="sr-only">(required)</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    id="contact-name"
+                                    required
+                                    autoComplete="name"
+                                    aria-invalid={!!fieldErrors.name}
+                                    aria-describedby={fieldErrors.name ? "contact-name-error" : undefined}
+                                    onBlur={handleBlur}
+                                />
+                                {renderFieldError("name")}
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="contact-email">
+                                    Email Address <span className="required-indicator" aria-hidden="true">*</span>
+                                    <span className="sr-only">(required)</span>
+                                </label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    id="contact-email"
+                                    required
+                                    autoComplete="email"
+                                    aria-invalid={!!fieldErrors.email}
+                                    aria-describedby={fieldErrors.email ? "contact-email-error" : undefined}
+                                    onBlur={handleBlur}
+                                />
+                                {renderFieldError("email")}
+                            </div>
                         </div>
                         <div className="form-row">
-                            <input
-                                type="tel"
-                                name="phone"
-                                placeholder="Mobile Number"
-                                id="contact-phone"
-                            />
-                            <input
-                                type="text"
-                                name="subject"
-                                placeholder="Subject"
-                                required
-                                id="contact-subject"
-                            />
+                            <div className="form-group">
+                                <label htmlFor="contact-phone">
+                                    Mobile Number
+                                </label>
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    id="contact-phone"
+                                    autoComplete="tel"
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="contact-subject">
+                                    Subject <span className="required-indicator" aria-hidden="true">*</span>
+                                    <span className="sr-only">(required)</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name="subject"
+                                    id="contact-subject"
+                                    required
+                                    aria-invalid={!!fieldErrors.subject}
+                                    aria-describedby={fieldErrors.subject ? "contact-subject-error" : undefined}
+                                    onBlur={handleBlur}
+                                />
+                                {renderFieldError("subject")}
+                            </div>
                         </div>
-                        <textarea
-                            name="message"
-                            placeholder="Your Message"
-                            required
-                            id="contact-message"
-                        ></textarea>
+                        <div className="form-group">
+                            <label htmlFor="contact-message">
+                                Your Message <span className="required-indicator" aria-hidden="true">*</span>
+                                <span className="sr-only">(required)</span>
+                            </label>
+                            <textarea
+                                name="message"
+                                id="contact-message"
+                                required
+                                aria-invalid={!!fieldErrors.message}
+                                aria-describedby={fieldErrors.message ? "contact-message-error" : undefined}
+                                onBlur={handleBlur}
+                            ></textarea>
+                            {renderFieldError("message")}
+                        </div>
 
-                        {sent && (
-                            <div
-                                style={{
-                                    padding: "12px 20px",
-                                    borderRadius: "12px",
-                                    background: "rgba(0, 229, 160, 0.08)",
-                                    border: "1px solid rgba(0, 229, 160, 0.2)",
-                                    color: "#00E5A0",
-                                    fontSize: "0.9rem",
-                                    fontWeight: 600,
-                                }}
-                            >
-                                ✓ Message sent successfully! I&apos;ll get back to you soon.
-                            </div>
-                        )}
+                        {/* Live region for form status announcements */}
+                        <div
+                            ref={statusRef}
+                            role="status"
+                            aria-live="polite"
+                            aria-atomic="true"
+                        >
+                            {sent && (
+                                <div className="form-status form-status-success">
+                                    <span aria-hidden="true">✓</span> Message sent successfully! I&apos;ll get back to you soon.
+                                </div>
+                            )}
 
-                        {error && (
-                            <div
-                                style={{
-                                    padding: "12px 20px",
-                                    borderRadius: "12px",
-                                    background: "rgba(255, 107, 138, 0.08)",
-                                    border: "1px solid rgba(255, 107, 138, 0.2)",
-                                    color: "#FF6B8A",
-                                    fontSize: "0.9rem",
-                                    fontWeight: 600,
-                                }}
-                            >
-                                ✕ {error}
-                            </div>
-                        )}
+                            {error && (
+                                <div className="form-status form-status-error">
+                                    <span aria-hidden="true">✕</span> {error}
+                                </div>
+                            )}
+                        </div>
 
-                        <button type="submit" className="btn-primary" disabled={sending}>
+                        <button
+                            type="submit"
+                            className="btn-primary"
+                            disabled={sending}
+                            aria-busy={sending}
+                        >
                             <i
                                 className={`bx ${sending ? "bx-loader-alt bx-spin" : "bx-send"}`}
+                                aria-hidden="true"
                             ></i>
                             {sending ? "Sending..." : "Send Message"}
                         </button>

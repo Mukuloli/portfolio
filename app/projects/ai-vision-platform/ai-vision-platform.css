@@ -186,22 +186,22 @@
 
 .tech-pill {
   padding: 7px 18px;
-  background: rgba(139, 92, 246, 0.06);
-  border: 1px solid rgba(139, 92, 246, 0.12);
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.2);
   border-radius: var(--radius-full);
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: #e2e8f0;
   transition: all 0.3s;
   letter-spacing: 0.02em;
 }
 
 .tech-pill:hover {
-  background: rgba(139, 92, 246, 0.12);
+  background: rgba(139, 92, 246, 0.25);
   border-color: var(--accent-1);
-  color: var(--accent-1);
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.15);
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.2);
 }
 
 /* Hero Image */
@@ -796,5 +796,38 @@
   .project-cta-actions {
     flex-direction: column;
     align-items: center;
+  }
+}
+
+/* ======= SEMANTIC LIST RESETS ======= */
+.pipeline-flow {
+  padding: 0;
+}
+
+.pipeline-step-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.expertise-tags,
+.project-hero-techs,
+.tech-category-items {
+  padding: 0;
+}
+
+/* ======= REDUCED MOTION ======= */
+@media (prefers-reduced-motion: reduce) {
+  .project-bg-orbs .orb {
+    animation: none;
+  }
+
+  .project-hero-badge {
+    animation: none;
+  }
+
+  .project-hero h1,
+  .project-hero-desc,
+  .project-hero-techs {
+    animation: none;
   }
 }

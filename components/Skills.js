@@ -55,7 +55,7 @@ export default function Skills() {
     ];
 
     return (
-        <section className="section-padding" id="skills">
+        <section className="section-padding" id="skills" tabIndex={-1}>
             <ScrollReveal>
                 <h2 className="section-title">
                     Technical <span>Skills</span>
@@ -68,17 +68,17 @@ export default function Skills() {
                 {skillCategories.map((cat, i) => (
                     <ScrollReveal key={i} delay={i * 80} direction="scale">
                         <div className="glass-card skill-card">
-                            <div className="skill-icon">
+                            <div className="skill-icon" aria-hidden="true">
                                 <i className={cat.icon}></i>
                             </div>
                             <h3>{cat.title}</h3>
-                            <div className="skill-tags">
+                            <ul className="skill-tags" aria-label={`${cat.title} skills`}>
                                 {cat.tags.map((tag, j) => (
-                                    <span key={j} className="skill-tag">
+                                    <li key={j} className="skill-tag">
                                         {tag}
-                                    </span>
+                                    </li>
                                 ))}
-                            </div>
+                            </ul>
                         </div>
                     </ScrollReveal>
                 ))}

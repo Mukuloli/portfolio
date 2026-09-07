@@ -1,4 +1,6 @@
 import "./globals.css";
+import SkipLink from "@/components/SkipLink";
+import RouteAnnouncer from "@/components/RouteAnnouncer";
 
 export const metadata = {
   title: "Mukul Oli — AI Developer & Software Engineer",
@@ -22,6 +24,8 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
+        <SkipLink />
+        <RouteAnnouncer />
         <div className="app-wrapper">
           {children}
         </div>
